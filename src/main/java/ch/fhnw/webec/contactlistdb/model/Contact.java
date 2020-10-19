@@ -5,16 +5,24 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Contact {
 
+    @Id
+    @GeneratedValue
     private long id;
 
     private String firstName;
     private String lastName;
 
+    @ElementCollection
     private final List<String> emails = new ArrayList<>();
 
     public long getId() {
