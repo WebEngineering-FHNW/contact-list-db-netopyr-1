@@ -23,6 +23,11 @@
 
 <main>
 
+    <form action="/" method="get">
+        <label for="search">Search:</label>
+        <input id="search" name="search">
+    </form>
+
     <#macro row label id value>
         <tr>
             <th>${label}:</th>

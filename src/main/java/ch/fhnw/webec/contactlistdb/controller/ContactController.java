@@ -1,6 +1,7 @@
 package ch.fhnw.webec.contactlistdb.controller;
 
 import ch.fhnw.webec.contactlistdb.service.ContactService;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +22,15 @@ public class ContactController {
     }
 
     @GetMapping
-    public ModelAndView getIndex(@RequestParam(required = false) Long select) {
+    public ModelAndView getIndex(@RequestParam(required = false) Long select, @RequestParam(required = false) String search) {
         final Map<String, Object> model = new HashMap<>();
         model.put("contacts", service.getAllContacts());
         if (select != null) {
             service.findContact(select).ifPresent(
+                    contact -> model.put("selected", contact)
+            );
+        } else if (Strings.isNotBlank(search)) {
+            service.findByName(search).ifPresent(
                     contact -> model.put("selected", contact)
             );
         }

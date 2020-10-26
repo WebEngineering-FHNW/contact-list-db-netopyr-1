@@ -42,4 +42,8 @@ public class ContactService {
     public Optional<Contact> findContact(long id) {
         return contactRepository.findById(id);
     }
+
+    public Optional<Contact> findByName(String name) {
+        return contactRepository.findByLastNameContainingOrFirstNameContainingAllIgnoreCase(name, name);
+    }
 }

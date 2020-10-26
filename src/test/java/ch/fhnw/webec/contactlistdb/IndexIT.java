@@ -55,6 +55,9 @@ class IndexIT {
             assertThat(emails).contains("dpocock0@google.es");
             assertThat(emails).contains("hdafforne1@slashdot.org");
         });
+        assertThat(page.getSelectedJobTitle()).hasValue("Associate Professor");
+        assertThat(page.getSelectedCompany()).hasValue("Skiba");
+        assertThat(page.getSelectedPhones()).hasValue("");
     }
 
     @Test
@@ -71,6 +74,12 @@ class IndexIT {
         assertThat(page.getSelectedLastame()).hasValue("Blacket");
         assertThat(page.getSelectedEmails()).hasValueSatisfying(emails -> {
             assertThat(emails).contains("bgosker0@hugedomains.com");
+        });
+        assertThat(page.getSelectedJobTitle()).hasValue("Editor");
+        assertThat(page.getSelectedCompany()).hasValue("Quamba");
+        assertThat(page.getSelectedPhones()).hasValueSatisfying(phones -> {
+            assertThat(phones).contains("(+41) 902-4926396");
+            assertThat(phones).contains("(+41) 941-5435141");
         });
     }
 }

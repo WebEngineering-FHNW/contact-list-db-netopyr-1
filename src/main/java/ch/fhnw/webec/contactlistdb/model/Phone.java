@@ -5,11 +5,36 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Phone {
+
+    @Id
+    @GeneratedValue
+    private long id;
 
     private String countryCode;
     private String areaCode;
     private String number;
+
+    public Phone() {}
+
+    public Phone(String countryCode, String areaCode, String number) {
+        this.countryCode = countryCode;
+        this.areaCode = areaCode;
+        this.number = number;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getCountryCode() {
         return countryCode;
@@ -44,6 +69,7 @@ public class Phone {
         Phone phone = (Phone) o;
 
         return new EqualsBuilder()
+                .append(id, phone.id)
                 .append(countryCode, phone.countryCode)
                 .append(areaCode, phone.areaCode)
                 .append(number, phone.number)
@@ -53,6 +79,7 @@ public class Phone {
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
+                .append(id)
                 .append(countryCode)
                 .append(areaCode)
                 .append(number)
@@ -62,6 +89,7 @@ public class Phone {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+                .append("id", id)
                 .append("countryCode", countryCode)
                 .append("areaCode", areaCode)
                 .append("number", number)

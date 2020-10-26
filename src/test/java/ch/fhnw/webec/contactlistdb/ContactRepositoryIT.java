@@ -2,6 +2,7 @@ package ch.fhnw.webec.contactlistdb;
 
 import ch.fhnw.webec.contactlistdb.dao.ContactRepository;
 import ch.fhnw.webec.contactlistdb.model.Contact;
+import ch.fhnw.webec.contactlistdb.model.Phone;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -28,6 +29,10 @@ public class ContactRepositoryIT {
         contact.setLastName("Snow");
         contact.getEmails().add("jon.snow@thewall.com");
         contact.getEmails().add("jon@snow.com");
+        contact.setJobTitle("Ranger");
+        contact.setCompany("Night's watch");
+        contact.getPhones().add(new Phone("+42", "123", "456789"));
+        contact.getPhones().add(new Phone("+42", "987", "654321"));
         entityManager.persist(contact);
         entityManager.flush();
 
